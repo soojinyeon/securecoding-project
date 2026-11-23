@@ -1,0 +1,26 @@
+# CampusHub Vulnerable Lab - docker-compose
+# =========================================
+# WARNING: Intentionally vulnerable. LOCAL LAB ONLY.
+#
+# 포트는 반드시 127.0.0.1 로만 게시하여 외부 네트워크에 노출되지 않게 한다.
+# (예: "5000:5000" 이 아니라 "127.0.0.1:5000:5000")
+
+services:
+  campushub:
+    build: .
+    container_name: campushub-lab
+    ports:
+      - "127.0.0.1:5000:5000"   # localhost 전용 게시 (외부 노출 금지)
+    volumes:
+      # DB/uploads 를 named volume 으로 두어 down -v 로 초기화 가능
+      - campushub-data:/app/data
+      - campushub-uploads:/app/uploads
+    environment:
+      - CAMPUSHUB_HOST=0.0.0.0
+      - CAMPUSHUB_PORT=5000
+      - CAMPUSHUB_DEBUG=1
+    restart: "no"
+
+volumes:
+  campushub-data:
+  campushub-uploads:
